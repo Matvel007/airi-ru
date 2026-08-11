@@ -42,6 +42,7 @@
     "injeca": "catalog:",
     "ioredis": "catalog:",
     "jose": "catalog:",
+    "ofetch": "catalog:",
     "pg": "catalog:",
     "resend": "catalog:",
     "tsx": "catalog:",
@@ -50,7 +51,9 @@
   },
   "devDependencies": {
     "@better-auth/cli": "catalog:",
+    "@electric-sql/pglite": "catalog:",
     "@types/pg": "catalog:",
+    "drizzle-kit": "catalog:",
     "typescript": "catalog:"
   }
 }

@@ -26,6 +26,7 @@ import { ApiError } from './error'
 import { oidcJwtBearer } from './oidc-jwt-bearer'
 import { getAuthTrustedOrigins, getTrustedOrigin } from './origin'
 import { createAppleClientSecret, createSocialAuthorizationRevoker } from './social-authorization'
+import { steam } from './steam'
 
 const logger = useLogger('auth').useGlobalConfig()
 
@@ -479,6 +480,10 @@ export function createAuth(
       // already handles. See oidc-jwt-bearer.ts for the
       // architectural mismatch this paves over.
       oidcJwtBearer(env),
+      // Steam's web login is OpenID 2.0, not OAuth2/OIDC, so it can't be a
+      // `socialProviders` entry — see steam.ts for why this
+      // needs to be its own plugin.
+      steam(),
       magicLink({
         // NOTICE: better-auth's magic-link callback receives a server-side
         // verification URL ({baseURL}/magic-link/verify?token=...&callbackURL=...).
