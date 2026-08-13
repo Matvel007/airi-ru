@@ -61,7 +61,7 @@ async function handleGenerateTestSpeech() {
     const response = await props.generateSpeech(input, voice.value, useSSML.value, model.value)
 
     // Convert the response to a blob and create an object URL
-    audioUrl.value = URL.createObjectURL(new Blob([response]))
+    audioUrl.value = URL.createObjectURL(new Blob([response], { type: 'audio/mp3' }))
 
     // Play the audio
     setTimeout(() => {
