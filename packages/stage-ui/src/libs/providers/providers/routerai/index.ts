@@ -1,4 +1,4 @@
-import { createChatProvider, createEmbedProvider, createModelProvider, merge } from '@xsai-ext/providers/utils'
+import { createOpenAI } from '@xsai-ext/providers/create'
 import { z } from 'zod'
 
 import { ProviderValidationCheck } from '../../types'
@@ -11,7 +11,7 @@ const routerAIConfigSchema = z.object({
   baseUrl: z
     .string('Base URL')
     .optional()
-    .default('https://routerai.ru/api/v1/'),
+    .default('https://routerai.ru/api/v1'),
 })
 
 type RouterAIConfig = z.input<typeof routerAIConfigSchema>
@@ -40,11 +40,7 @@ export const providerRouterAI = defineProvider<RouterAIConfig>({
     }),
   }),
   createProvider(config) {
-    return merge(
-      createChatProvider({ apiKey: config.apiKey, baseURL: config.baseUrl! }),
-      createEmbedProvider({ apiKey: config.apiKey, baseURL: config.baseUrl! }),
-      createModelProvider({ apiKey: config.apiKey, baseURL: config.baseUrl! }),
-    )
+    return createOpenAI(config.apiKey, config.baseUrl || 'https://routerai.ru/api/v1')
   },
 
   validationRequiredWhen(config) {
@@ -52,7 +48,7 @@ export const providerRouterAI = defineProvider<RouterAIConfig>({
   },
   validators: {
     ...createOpenAICompatibleValidators({
-      checks: [ProviderValidationCheck.ModelList, ProviderValidationCheck.ChatCompletions],
+      checks: [ProviderValidationCheck.Connectivity, ProviderValidationCheck.ModelList, ProviderValidationCheck.ChatCompletions],
     }),
   },
 })

@@ -1,4 +1,4 @@
-import { createChatProvider, createEmbedProvider, createModelProvider, merge } from '@xsai-ext/providers/utils'
+import { createOpenAI } from '@xsai-ext/providers/create'
 import { z } from 'zod'
 
 import { ProviderValidationCheck } from '../../types'
@@ -11,7 +11,7 @@ const aiTunnelConfigSchema = z.object({
   baseUrl: z
     .string('Base URL')
     .optional()
-    .default('https://api.aitunnel.ru/v1/'),
+    .default('https://api.aitunnel.ru/v1'),
 })
 
 type AITunnelConfig = z.input<typeof aiTunnelConfigSchema>
@@ -40,11 +40,7 @@ export const providerAITunnel = defineProvider<AITunnelConfig>({
     }),
   }),
   createProvider(config) {
-    return merge(
-      createChatProvider({ apiKey: config.apiKey, baseURL: config.baseUrl! }),
-      createEmbedProvider({ apiKey: config.apiKey, baseURL: config.baseUrl! }),
-      createModelProvider({ apiKey: config.apiKey, baseURL: config.baseUrl! }),
-    )
+    return createOpenAI(config.apiKey, config.baseUrl || 'https://api.aitunnel.ru/v1')
   },
 
   validationRequiredWhen(config) {
@@ -52,7 +48,7 @@ export const providerAITunnel = defineProvider<AITunnelConfig>({
   },
   validators: {
     ...createOpenAICompatibleValidators({
-      checks: [ProviderValidationCheck.ModelList, ProviderValidationCheck.ChatCompletions],
+      checks: [ProviderValidationCheck.Connectivity, ProviderValidationCheck.ModelList, ProviderValidationCheck.ChatCompletions],
     }),
   },
 })
