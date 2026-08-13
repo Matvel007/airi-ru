@@ -331,10 +331,14 @@ function trackOfficialTtsExposure(providerId = activeSpeechProvider.value, model
   })
 }
 
-// Sync OpenAI Compatible model and voice from provider config
+// Sync OpenAI Compatible and FishAudio RU model and voice from provider config
 function syncOpenAICompatibleSettings() {
-  if (activeSpeechProvider.value !== 'openai-compatible-audio-speech')
+  if (activeSpeechProvider.value !== 'openai-compatible-audio-speech' && activeSpeechProvider.value !== 'fishaudio-ru')
     return
+
+  const isFishAudioRu = activeSpeechProvider.value === 'fishaudio-ru'
+  const defaultProviderModel = isFishAudioRu ? 'fishaudio-s21pro-flash' : 'tts-1'
+  const defaultProviderVoice = isFishAudioRu ? 'dec6afac-bd01-4f4f-88ab-6f020340e32f' : 'alloy'
 
   const providerConfig = providerStore.getProviderConfig(activeSpeechProvider.value)
   // Sync model from provider config (override any existing value from previous provider)
@@ -343,7 +347,7 @@ function syncOpenAICompatibleSettings() {
   }
   else {
     // If no model in provider config, use default
-    activeSpeechModel.value = 'tts-1'
+    activeSpeechModel.value = defaultProviderModel
   }
   // Sync voice from provider config (override any existing value from previous provider)
   // Use updateCustomVoiceName to ensure proper reactivity
@@ -353,8 +357,8 @@ function syncOpenAICompatibleSettings() {
   }
   else {
     // If no voice in provider config, use default
-    activeSpeechVoiceId.value = 'alloy'
-    updateCustomVoiceName('alloy')
+    activeSpeechVoiceId.value = defaultProviderVoice
+    updateCustomVoiceName(defaultProviderVoice)
   }
 }
 
