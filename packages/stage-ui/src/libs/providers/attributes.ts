@@ -38,6 +38,8 @@ const recommendedPaidCloud = {
 
 const providerAttributesById = {
   '302-ai': paidCloud,
+  'routerai': paidCloud,
+  'aitunnel': paidCloud,
   'aihubmix': paidCloud,
   'alibaba-cloud-model-studio': paidCloud,
   'aliyun-nls-transcription': paidCloud,

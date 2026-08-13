@@ -1434,6 +1434,12 @@ pages:
       302-ai:
         description: 302.AI
         title: 302.AI
+      routerai:
+        description: routerai.ru
+        title: RouterAI (RU)
+      aitunnel:
+        description: aitunnel.ru
+        title: AITunnel (RU)
       comet-api:
         description: CometAPI.com
         title: Comet API

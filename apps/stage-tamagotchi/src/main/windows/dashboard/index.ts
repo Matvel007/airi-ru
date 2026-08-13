@@ -80,15 +80,7 @@ export async function setupDashboardWindow(params: {
     params.onWindowCreated(window)
   }
 
-  // NOTICE: in development mode, open devtools by default
-  if (is.dev || env.MAIN_APP_DEBUG || env.APP_DEBUG) {
-    try {
-      window.webContents.openDevTools({ mode: 'detach' })
-    }
-    catch (err) {
-      console.error('failed to open devtools:', err)
-    }
-  }
+  // DevTools can be opened manually from the tray menu or settings
 
   function handleNewBounds(newBounds: Rectangle) {
     const config = getConfig()
