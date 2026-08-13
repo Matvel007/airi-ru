@@ -46,7 +46,40 @@ function normalizeBaseUrl(baseUrl: string | undefined) {
 function createAudioProvider(config: AudioConfig | undefined) {
   const apiKey = config?.apiKey?.trim() ?? ''
   const baseUrl = normalizeBaseUrl(config?.baseUrl)
-  return createOpenAI(apiKey, baseUrl)
+  const provider = createOpenAI(apiKey, baseUrl)
+
+  if (baseUrl.includes('fishaudio.org')) {
+    const originalSpeech = provider.speech.bind(provider)
+    provider.speech = (model: string, extraOptions?: Record<string, unknown>) => {
+      const spec = originalSpeech(model, extraOptions)
+      return {
+        ...spec,
+        execute: async (options: { model?: string, input?: string, text?: string, voice?: string, voiceId?: string, [key: string]: unknown }) => {
+          const body: Record<string, unknown> = {
+            text: options.input || options.text || '',
+            voiceId: options.voice || options.voiceId || '',
+            modelId: model || 'fishaudio-s21pro-flash',
+          }
+          const fetchUrl = `${baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`}tts`
+          const res = await fetch(fetchUrl, {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${apiKey}`,
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body),
+          })
+          if (!res.ok) {
+            const errText = await res.text()
+            throw new Error(`fishaudio.org returned ${res.status}: ${errText}`)
+          }
+          return await res.arrayBuffer()
+        },
+      }
+    }
+  }
+
+  return provider
 }
 
 function createTranscriptionProvider(config: AudioConfig) {
