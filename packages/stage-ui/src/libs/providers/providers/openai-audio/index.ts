@@ -43,8 +43,10 @@ function normalizeBaseUrl(baseUrl: string | undefined) {
   return value && !value.endsWith('/') ? `${value}/` : value
 }
 
-function createAudioProvider(config: AudioConfig) {
-  return createOpenAI(config.apiKey.trim(), normalizeBaseUrl(config.baseUrl))
+function createAudioProvider(config: AudioConfig | undefined) {
+  const apiKey = config?.apiKey?.trim() ?? ''
+  const baseUrl = normalizeBaseUrl(config?.baseUrl)
+  return createOpenAI(apiKey, baseUrl)
 }
 
 function createTranscriptionProvider(config: AudioConfig) {
