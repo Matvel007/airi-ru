@@ -51,14 +51,14 @@ dialogs:
     no-models-help: >-
       Veuillez revenir à l’étape précédente et vérifier votre clé API, ou bien vérifier la connexion réseau.
     permissions:
-      title: Gestion des autorisations
-      description: Vous pouvez accorder les autorisations nécessaires maintenant ou les configurer plus tard.
+      title: Permission management
+      description: You can grant the required permissions now or continue and configure them later.
       notificationsTitle: Notifications
       notificationsDescription: Autorisez les rappels et les mises à jour de statut importantes.
       microphoneTitle: Microphone
-      microphoneDescription: Autorisez AIRI à utiliser le microphone pour la saisie vocale et la transcription.
-      requestAction: Demander l’accès
-      optionalHint: Vous pouvez continuer même si ces autorisations ne sont pas accordées.
+      microphoneDescription: Allow AIRI to use your microphone for voice input and transcription.
+      requestAction: Request access
+      optionalHint: You can continue even if these permissions are not granted.
       stateGranted: Accordée
       stateNotGranted: Non accordée
   bug-report:
@@ -107,7 +107,7 @@ model-select:
   panel-callout:
     support-status-header: We support both 2D and 3D models
     support-status: >
-      Click {select-button} to select or import models. Currently, {zip} (for Live2D and Spine models), {vrm} (for VRM models), and {mmd} (for MMD models, zipped with their textures) are supported.
+      Click {select-button} to select or import models. Currently, {zip} (for Live2D and Spine models) and {vrm} (for VRM models) are supported.
     model-type-example: >
       Neuro-sama uses 2D model driven by framework developed by Live2D Inc, while Grok Ani (in Grok Companion) uses 3D model driven by VRM / MMD open formats.
   select-model:
@@ -299,10 +299,10 @@ pages:
     activate: Activer
     active: Actif
     active_badge: Actuellement actif
-    activation_notice: Passage à {name}. La conversation actuelle utilise maintenant ce personnage.
+    activation_notice: Switched to {name}. The current conversation now uses this character.
     cancel: Annuler l'action
     save: Enregistrer les modifications
-    save_and_activate: Enregistrer et activer
+    save_and_activate: Save and activate
     card_not_found: Carte non trouvée
     character: Personnage
     close: Fermer
@@ -413,7 +413,7 @@ pages:
         delete: Supprimer toutes les sessions de chat
       models:
         title: Modèles
-        description: Remove imported Live2D, VRM, Spine, and MMD models.
+        description: Supprimer les modèles Live2D/VRM importés.
         delete: Supprimer tous les modèles
       modules:
         title: Modules
@@ -454,7 +454,7 @@ pages:
       desktop_window_centered: Desktop window moved to screen center.
       desktop_reset: Données du bureau réinitialisées.
   models:
-    description: Live2D, VRM, Spine, MMD, etc.
+    description: Live2D, VRM, Spine, etc.
     title: Modèles
     sections:
       section:
@@ -657,6 +657,19 @@ pages:
         section:
           provider-selection:
             description: Sélectionnez le fournisseur de reconnaissance vocale approprié
+          playground:
+            current: Current transcript
+            description: Listen through the active Hearing pipeline and keep each completed speech segment below.
+            empty: Start monitoring and speak into the selected microphone.
+            error-title: Transcription error
+            listening: Listening for speech…
+            no-transcription: No speech was recognized in this audio.
+            segment: 'Speech segment {number}'
+            start: Start monitoring
+            stop: Stop monitoring
+            title: Hearing playground
+            transcribing: Transcribing…
+            transcription-failed: Transcription failed.
           confidence-threshold:
             title: Confidence Threshold
             description: >-
@@ -1451,8 +1464,8 @@ pages:
       description: Thème sombre, langues, etc.
       title: Général
     permissions:
-      description: Consultez l’état actuel des autorisations.
-      title: Gestion des autorisations
+      description: View current permission status.
+      title: Permission Management
     description: Personnalisez votre scène !
     sections:
       section:

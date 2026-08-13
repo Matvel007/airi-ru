@@ -51,14 +51,14 @@ dialogs:
     no-models-help: >-
       前のステップに戻ってAPIキーを確認するか、ネットワーク接続を確認してください。
     permissions:
-      title: 権限管理
-      description: 今すぐ必要な権限を許可するか、続行して後で設定できます。
+      title: Permission management
+      description: You can grant the required permissions now or continue and configure them later.
       notificationsTitle: 通知
       notificationsDescription: リマインダーと重要なステータス更新を許可する。
-      microphoneTitle: マイク
-      microphoneDescription: AIRI が音声入力と文字起こしにマイクを使用することを許可します。
-      requestAction: アクセスをリクエスト
-      optionalHint: これらの権限を許可しない場合でも続行できます。
+      microphoneTitle: Microphone
+      microphoneDescription: Allow AIRI to use your microphone for voice input and transcription.
+      requestAction: Request access
+      optionalHint: You can continue even if these permissions are not granted.
       stateGranted: 許可済み
       stateNotGranted: 許可されていません
   bug-report:
@@ -107,7 +107,7 @@ model-select:
   panel-callout:
     support-status-header: 私たちは2Dと3Dのモデル両方をサポートしています
     support-status: >
-      Click {select-button} to select or import models. Currently, {zip} (for Live2D and Spine models), {vrm} (for VRM models), and {mmd} (for MMD models, zipped with their textures) are supported.
+      Click {select-button} to select or import models. Currently, {zip} (for Live2D and Spine models) and {vrm} (for VRM models) are supported.
     model-type-example: >
       Neuro-sama uses 2D model driven by framework developed by Live2D Inc, while Grok Ani (in Grok Companion) uses 3D model driven by VRM / MMD open formats.
   select-model:
@@ -299,10 +299,10 @@ pages:
     activate: 有効化
     active: 有効
     active_badge: 現在有効
-    activation_notice: '{name} に切り替えました。現在の会話ではこのキャラクターが使用されます。'
+    activation_notice: Switched to {name}. The current conversation now uses this character.
     cancel: 操作の取消
     save: 変更を保存
-    save_and_activate: 保存して有効化
+    save_and_activate: Save and activate
     card_not_found: カードが見つかりません
     character: キャラクター
     close: 閉じる
@@ -413,7 +413,7 @@ pages:
         delete: 全てのチャットセッションを削除
       models:
         title: モデル
-        description: Remove imported Live2D, VRM, Spine, and MMD models.
+        description: インポートされた Live2D/VRM モデルを削除。
         delete: すべてのモデルを削除
       modules:
         title: モジュール
@@ -454,7 +454,7 @@ pages:
       desktop_window_centered: Desktop window moved to screen center.
       desktop_reset: デスクトップのデータをリセットしました。
   models:
-    description: Live2D, VRM, Spine, MMD, etc.
+    description: Live2D、VRM、Spine、など。
     title: モデル
     sections:
       section:
@@ -657,6 +657,19 @@ pages:
         section:
           provider-selection:
             description: 適切な音声認識プロバイダーを選択
+          playground:
+            current: Current transcript
+            description: Listen through the active Hearing pipeline and keep each completed speech segment below.
+            empty: Start monitoring and speak into the selected microphone.
+            error-title: Transcription error
+            listening: Listening for speech…
+            no-transcription: No speech was recognized in this audio.
+            segment: 'Speech segment {number}'
+            start: Start monitoring
+            stop: Stop monitoring
+            title: Hearing playground
+            transcribing: Transcribing…
+            transcription-failed: Transcription failed.
           confidence-threshold:
             title: 信頼度の閾値
             description: >-
@@ -1451,8 +1464,8 @@ pages:
       description: ダークテーマ、言語など。
       title: 一般
     permissions:
-      description: 現在の権限状態を確認します。
-      title: 権限管理
+      description: View current permission status.
+      title: Permission Management
     description: ステージをカスタマイズしよう！
     sections:
       section:
