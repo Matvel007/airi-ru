@@ -105,12 +105,14 @@ async function saveProviderConfiguration(data: ProviderConfigData) {
   }
 
   const providerId = selectedProvider.value.id
-  providerStore.ensureProvider(providerId, providerId, config)
-
-  const existingProvider = providerStore.getProvider(providerId)
-  if (existingProvider) {
-    existingProvider.config = { ...existingProvider.config, ...config }
-    existingProvider.status = 'configured'
+  const current = providerStore.ensureProvider(providerId, providerId, config)
+  providerStore.providers = {
+    ...providerStore.providers,
+    [providerId]: {
+      ...current,
+      config: { ...current.config, ...config },
+      status: 'configured',
+    },
   }
 
   activeProvider.value = providerId
