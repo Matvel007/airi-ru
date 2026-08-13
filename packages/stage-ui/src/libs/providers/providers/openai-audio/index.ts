@@ -80,8 +80,6 @@ function createAudioValidators<TConfig extends AudioConfig>() {
               const url = new URL(baseUrl)
               if (!url.host)
                 errors.push({ error: new Error('Base URL is not absolute. Try to include a scheme (http:// or https://).') })
-              else if (!baseUrl.endsWith('/'))
-                errors.push({ error: new Error('Base URL must end with a trailing slash (/).') })
             }
             catch {
               errors.push({ error: new Error('Base URL is not absolute. Try to include a scheme (http:// or https://).') })
