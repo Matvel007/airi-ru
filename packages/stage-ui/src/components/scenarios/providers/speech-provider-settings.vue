@@ -54,7 +54,7 @@ const apiKey = computed({
     if (!providers.value[props.providerId])
       providers.value[props.providerId] = {}
 
-    providers.value[props.providerId].apiKey = value
+    providers.value[props.providerId].apiKey = (value || '').trim()
   },
 })
 
@@ -64,7 +64,7 @@ const baseUrl = computed({
     if (!providers.value[props.providerId])
       providers.value[props.providerId] = {}
 
-    providers.value[props.providerId].baseUrl = value
+    providers.value[props.providerId].baseUrl = (value || '').trim()
   },
 })
 
