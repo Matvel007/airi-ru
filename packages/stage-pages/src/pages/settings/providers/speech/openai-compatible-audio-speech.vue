@@ -106,6 +106,7 @@ onMounted(() => {
 
 // Generate speech with OpenAI-compatible parameters
 async function handleGenerateSpeech(input: string, voiceId: string, _useSSML: boolean, modelId?: string) {
+  await providersStore.disposeProviderInstance(providerId)
   const provider = await providersStore.getProviderInstance<SpeechProvider<string>>(providerId)
   if (!provider) {
     throw new Error('Failed to initialize speech provider')
