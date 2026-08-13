@@ -60,6 +60,10 @@ async function handleGenerateTestSpeech() {
 
     const response = await props.generateSpeech(input, voice.value, useSSML.value, model.value)
 
+    if (!response || response.byteLength === 0) {
+      throw new Error('Received 0 bytes of audio data from provider.')
+    }
+
     // Convert the response to a blob and create an object URL
     audioUrl.value = URL.createObjectURL(new Blob([response], { type: 'audio/mp3' }))
 
