@@ -55,7 +55,7 @@ import { setupWidgetsWindowManager } from './windows/widgets'
 // TODO: once we refactored eventa to support window-namespaced contexts,
 // we can remove the setMaxListeners call below since eventa will be able to dispatch and
 // manage events within eventa's context system.
-ipcMain.setMaxListeners(100)
+app.commandLine.appendSwitch('disable-quic')
 
 setElectronMainDirname(dirname(fileURLToPath(import.meta.url)))
 setGlobalFormat(Format.Pretty)
