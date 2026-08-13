@@ -109,6 +109,7 @@ async function saveProviderConfiguration(data: ProviderConfigData) {
     ...config,
   }
 
+  providersStore.saveProviderCredentials(selectedProvider.value.id, config)
   activeProvider.value = selectedProvider.value.id
 
   await nextTick()

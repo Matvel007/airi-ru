@@ -5,6 +5,8 @@ import { Button } from '@proj-airi/ui'
 import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
 
+import { onMounted } from 'vue'
+
 import Alert from '../../../misc/alert.vue'
 
 import { useConsciousnessStore } from '../../../../stores/modules/consciousness'
@@ -19,11 +21,18 @@ const { t } = useI18n()
 const consciousnessStore = useConsciousnessStore()
 const {
   activeModel,
+  activeProvider,
   modelSearchQuery,
   providerModels,
   isLoadingActiveProviderModels,
   activeProviderModelError,
 } = storeToRefs(consciousnessStore)
+
+onMounted(async () => {
+  if (activeProvider.value && providerModels.value.length === 0) {
+    await consciousnessStore.loadModelsForProvider(activeProvider.value)
+  }
+})
 </script>
 
 <template>
