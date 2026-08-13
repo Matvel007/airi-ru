@@ -114,6 +114,7 @@ async function saveProviderConfiguration(data: ProviderConfigData) {
       status: 'configured',
     },
   }
+  providerStore.markProviderAdded(providerId)
 
   activeProvider.value = providerId
 
